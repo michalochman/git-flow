@@ -154,3 +154,8 @@ dt {
   -webkit-hyphens: none !important;
   -moz-hyphens: none !important;
   hyphens: none !important; }
+
+.reveal section img.clean {
+  background: none;
+  border: none;
+  box-shadow: none; }

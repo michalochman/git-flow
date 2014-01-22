@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
 
-        <title>reveal.js - The HTML Presentation Framework</title>
+        <title>gitflow - A successful Git workflow</title>
 
         <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
         <meta name="author" content="Hakim El Hattab">
@@ -47,8 +47,10 @@
                 <section>
                     <h2>Heads Up</h2>
                     <p>
-                        Gitflow is…
+                        Gitflow is a workflow defining strict branching model designed around the project release.
                     </p>
+                    <br>
+                    <h3 class="fragment">Why?</h3>
                 </section>
 
                 <section data-transition="zoom">
@@ -63,11 +65,14 @@
                     </section>
                     <section data-transition="linear">
                         <h1 class="fragment shrink" data-fragment-index="1">Main branches</h1>
+                        <p class="fragment" data-fragment-index="1">
+                            <img class="clean" src="img/main.png" alt="Main branches">
+                        </p>
                         <dl>
-                            <dt class="fragment" data-fragment-index="1"><code>origin/master</code></dt>
-                            <dd class="fragment" data-fragment-index="1"><code>HEAD</code> <strong>always</strong> reflects a <em>production-ready</em> state</dd>
-                            <dt class="fragment" data-fragment-index="2"><code>origin/develop</code></dt>
-                            <dd class="fragment" data-fragment-index="2"><code>HEAD</code> reflects latest delivered <em>development</em> changes</dd>
+                            <dt class="fragment" data-fragment-index="2"><code>origin/master</code></dt>
+                            <dd class="fragment" data-fragment-index="2"><code>HEAD</code> <strong>always</strong> reflects a <em>production-ready</em> state</dd>
+                            <dt class="fragment" data-fragment-index="3"><code>origin/develop</code></dt>
+                            <dd class="fragment" data-fragment-index="4"><code>HEAD</code> reflects latest delivered <em>development</em> changes</dd>
                         </dl>
                     </section>
                     <section data-transition="linear">
@@ -101,11 +106,7 @@
 $ git checkout -b features/JIRA-1337 origin/develop
 Switched to a new branch "features/JIRA-1337"
                             </code></pre>
-                            <pre><code data-trim>
-develop           ---X--->
-                      \
-feature/JIRA-1337 -----A--->
-                            </code></pre>
+                            <p class="fragment"><img class="clean" src="img/feature1.png" alt="Start feature"></p>
                         </div>
                         <div class="fragment">
                             <p>…work…</p>
@@ -115,32 +116,25 @@ $ git commit -am "[JIRA-1337] more work B"
 $ # peek for changes in origin/develop:
 $ # git fetch origin/develop
                             </code></pre>
-                            <pre><code data-trim>
-develop           ---X---Y--->
-                      \
-feature/JIRA-1337 -----A---B--->
-                            </code></pre>
-                        </div>
+                            <p class="fragment"><img class="clean" src="img/feature2.png" alt="Add work"></p>
                     </section>
                     <section data-transition="linear">
                         <p>Finished working</p>
-                        <pre><code data-trim>
+                        <p><img class="clean" src="img/feature3.png" alt="Pre-rebase"></p>
+                        <pre class="fragment"><code data-trim>
 $ git rebase origin/develop
 First, rewinding head to replay your work on top of it...
 Applying: [JIRA-1337] add work A
 Applying: [JIRA-1337] more work B
                         </code></pre>
-                        <pre><code data-trim>
-develop           ---X---Y---Z--->
-                              \
-feature/JIRA-1337 -------------A'--B'--->
-                        </code></pre>
-                        <br>
+                        <p class="fragment"><img class="clean" src="img/feature4.png" alt="Post-rebase"></p>
                         <div class="fragment">
                             <p>Create Pull Request:</p>
                             <p>from <code>features/JIRA-1337</code> to <code>origin/develop</code>.</p>
                         </div>
-                        <br>
+                    </section>
+                    <section data-transition="linear">
+                        <p><img class="clean" src="img/feature.png" alt="Feature branches"></p>
                         <p class="fragment">Ask to close branch if no more work needed.</p>
                     </section>
                 </section>
@@ -148,7 +142,7 @@ feature/JIRA-1337 -------------A'--B'--->
                 <section data-transition="zoom">
                     <section data-transition="linear">
                         <h2>Release branches</h2>
-                        <p>Used for production releases and related meta-tasks (version numbers <i>etc.</i>). Minor bug fixes are also allowed. This way develop branch is cleared to receive new features.</p>
+                        <p>Used for production releases and related meta-tasks (version numbers, changelogs <i>etc.</i>). Minor bug fixes are also allowed. This way develop branch is cleared to receive new features.</p>
                         <br>
                         <p class="fragment">This is a moment where the upcoming release gets assigned a version number—not any earlier.</p>
                         <br>
@@ -168,11 +162,7 @@ $ git commit -a -m "bump version number to 1.2.0"
 [release/v1.2.0 abcdef1] bump version number to 1.2.0
 1 files changed, 1 insertions(+), 1 deletions(-)
                         </code></pre>
-                        <pre><code data-trim>
-develop        ---X---Y--->
-                       \
-release/v1.2.0 ---------R--S
-                        </code></pre>
+                        <p class="fragment"><img class="clean" src="img/release1.png" alt="Branch release"></p>
                     </section>
                     <section data-transition="linear">
                         <p>Deploy</p>
@@ -195,19 +185,16 @@ Merge made by recursive.
 (Summary of changes)
 $ git push origin develop
                         </code></pre>
-                        <pre><code data-trim>
-develop        ---D-------E--->
-                   \     /
-release/v1.2.0 -----R---S
-                         \
-master         ---M-------N--->
-                        </code></pre>
+                        <p class="fragment"><img class="clean" src="img/release2.png" alt="Merge release"></p>
+                    </section>
+                    <section data-transition="linear">
+                        <p><img class="clean" src="img/release.png" alt="Release branches"></p>
                     </section>
                 </section>
 
                 <section data-transition="zoom">
                     <section data-transition="linear">
-                        <h2>Hotfix branches</h2>
+                        <h2>Maintenance branches</h2>
                         <p>Used to fix critical bugs in production releases.</p>
                         <br>
                         <div class="fragment">
@@ -227,16 +214,12 @@ $ git commit -a -m "bump version number to 1.2.1"
 [hotfix/v1.2.1 abcdef3] bump version number to 1.2.1
 1 files changed, 1 insertions(+), 1 deletions(-)
                         </code></pre>
-                        <p>Fix critical bugs</p>
-                        <pre><code data-trim>
+                        <p class="fragment" data-fragment-index="1"><img class="clean" src="img/maintenance1.png" alt="Branch hotfix"></p>
+                        <p class="fragment" data-fragment-index="2">Fix critical bugs</p>
+                        <pre class="fragment" data-fragment-index="2"><code data-trim>
 $ git commit -a -m "[JIRA-1338] fix critical bug"
 [hotfix/v1.2.1 abcdef2] bump version number to 1.2.1
 5 files changed, 32 insertions(+), 17 deletions(-)
-                        </code></pre>
-                        <pre><code data-trim>
-master        ---M--->
-                  \
-hotfix/v1.2.1 -----H
                         </code></pre>
                     </section>
                     <section data-transition="linear">
@@ -260,13 +243,10 @@ Merge made by recursive.
 (Summary of changes)
 $ git push origin develop
                         </code></pre>
-                        <pre><code data-trim>
-develop       ---D---E--->
-                    /
-hotfix/v1.2.1 -----H
-                  / \
-master        ---M---N--->
-                        </code></pre>
+                        <p class="fragment"><img class="clean" src="img/maintenance2.png" alt="Merge hotfix"></p>
+                    </section>
+                    <section data-transition="linear">
+                        <p><img class="clean" src="img/maintenance.png" alt="Maintenance branches"></p>
                     </section>
                 </section>
 
@@ -287,6 +267,7 @@ master        ---M---N--->
                     </section>
                     <section data-transition="linear">
                         <h2>Tags</h2>
+                        <small>(only production deployed releases are tagged)</small>
                         <p><code>vX.Y.Z</code></p>
                         <p>where:</p>
                         <ul>
@@ -301,8 +282,20 @@ master        ---M---N--->
                 <section>
                     <h2>Further Reading</h2>
                     <ul>
-                        <li><a href="http://nvie.com/posts/a-successful-git-branching-model/">A successful Git branching model</a></li>
-                        <li><a href="https://www.atlassian.com/git/workflows#!workflow-gitflow">Gitflow Workflow</a></li>
+                        <li><a href="http://nvie.com/posts/a-successful-git-branching-model/">A successful Git branching model</a> @ nvie</li>
+                        <li><a href="https://www.atlassian.com/git/workflows#!workflow-gitflow">Gitflow Workflow</a> @ Atlassian</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h1>Questions?</h1>
+                </section>
+
+                <section>
+                    <h2>Credits</h2>
+                    <ul>
+                        <li><a href="http://nvie.com/">Vincent Driessen</a> for creating this workflow</li>
+                        <li><a href="https://www.atlassian.com/">Atlassian</a> for nicely presenting this worflow in diagrams</li>
                     </ul>
                 </section>
 
